@@ -32,10 +32,10 @@ class ProfileCest
      */
     public function pageTest(FunctionalTester $I)
     {
-        $I->amOnPage('site/profile');
+        $I->amOnPage('/site/profile');
         $I->dontSee('Здесь будет ваш профиль','span');
         $I->amLoggedInAs(1);
-        $I->amOnPage('site/profile');
+        $I->amOnPage('/site/profile');
         $I->see('Здесь будет ваш профиль','span');
     }
 }

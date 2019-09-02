@@ -6,7 +6,7 @@ use backend\tests\FunctionalTester;
 use common\fixtures\UserFixture;
 
 /**
- * Class ProfileCest
+ * @Class ProfileCest
  */
 class ProfileCest
 {

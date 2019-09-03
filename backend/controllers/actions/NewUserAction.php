@@ -4,12 +4,15 @@
 namespace backend\controllers\actions;
 
 
+use common\models\User;
 use yii\base\Action;
 
 class NewUserAction extends Action
 {
     public function run(){
 
-        return $this->controller->render('newuser');
+        $user = new User();
+
+        return $this->controller->render('newuser', ['model'=> $user]);
     }
 }

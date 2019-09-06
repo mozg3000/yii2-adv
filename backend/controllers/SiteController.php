@@ -1,6 +1,9 @@
 <?php
 namespace backend\controllers;
 
+use backend\controllers\actions\NewUserAction;
+use backend\controllers\actions\ProfileAction;
+use backend\controllers\actions\UsersAction;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -26,7 +29,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['logout', 'profile', 'users', 'newuser', 'index'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -50,6 +53,15 @@ class SiteController extends Controller
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
+            'profile' => [
+                'class' => ProfileAction::class
+            ],
+            'users'=>[
+                'class'=> UsersAction::class
+            ],
+            'newuser'=>[
+                'class' => NewUserAction::class
+            ]
         ];
     }
 

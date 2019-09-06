@@ -6,9 +6,9 @@ use backend\tests\FunctionalTester;
 use common\fixtures\UserFixture;
 
 /**
- * Class LoginCest
+ * @Class ProfileCest
  */
-class LoginCest
+class ProfileCest
 {
     /**
      * Load fixtures before db transaction begin
@@ -30,15 +30,12 @@ class LoginCest
     /**
      * @param FunctionalTester $I
      */
-    public function loginUser(FunctionalTester $I)
+    public function pageTest(FunctionalTester $I)
     {
-        $I->amOnPage('/site/login');
-        $I->fillField(['id'=>'loginform-username'], 'erau');
-        $I->fillField(['id'=>'loginform-password'], 'password_0');
-        $I->click('login-button');
-
-        $I->seeLink('Sign out');
-        $I->dontSeeLink('Login');
-        $I->dontSeeLink('Signup');
+        $I->amOnPage('/site/profile');
+        $I->dontSee('Здесь будет ваш профиль','span');
+        $I->amLoggedInAs(1);
+        $I->amOnPage('/site/profile');
+        $I->see('Здесь будет ваш профиль','span');
     }
 }

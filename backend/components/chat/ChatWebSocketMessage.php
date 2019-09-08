@@ -73,7 +73,8 @@ class ChatWebSocketMessage implements MessageComponentInterface{
 
             if($from != $client){
 
-                $client->send(date('H:i:s').': '.$msg);
+                $ret = ['from'=>$from->resourceId,'date'=>date('H:i:s'),'msg'=>$msg];
+                $client->send(json_encode($ret));
             }
         }
     }

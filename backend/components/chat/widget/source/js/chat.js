@@ -13,9 +13,10 @@ $(document).ready(function(){
         console.log('open connectioni');
     }
     chat.coon.onmessage = function(e){
+        let msg = JSON.parse(e.data);
         var $el = $('li.messages-menu ul.menu li:first').clone();
-        $el.find('p').text(e.data);
-        $el.find('h4').text('Websocket User');
+        $el.find('p').text(msg.date+' '+msg.msg);
+        $el.find('h4').text('User'+msg.from);
         $el.prependTo('li.messages-menu ul-menu');
 
         var cnt = $('li.messages-menu ul-menu').length;

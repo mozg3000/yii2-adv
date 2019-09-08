@@ -17,7 +17,8 @@ $(document).ready(function(){
         var $el = $('li.messages-menu ul.menu li:first').clone();
         $el.find('p').text(msg.date+' '+msg.msg);
         $el.find('h4').text('User'+msg.from);
-        $el.prependTo('li.messages-menu ul-menu');
+        $el.prependTo($('.menu'));
+        // $el.prependTo('li.messages-menu ul-menu');
 
         var cnt = $('li.messages-menu ul-menu').length;
         $('li.messages-menu span.label-success').text(cnt);

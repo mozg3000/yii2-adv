@@ -24,7 +24,8 @@ class ProfileController extends BaseController
 
     public function __construct(string $id, $module, array $config = [])
     {
-        $connection = new \Yii::$app->db;
+        $connection = \Yii::$app->db;
+//        print_r($connection);exit();
         $storage = new ProfileStorageMysql($connection);
         $this->service = new \backend\modules\profiles\services\ProfileService($storage) ;
 

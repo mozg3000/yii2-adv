@@ -55,7 +55,7 @@ class Profile
             ArrayHelper::getValue($data, 'password_hash'),
             ArrayHelper::getValue($data, 'verification_token'),
             ArrayHelper::getValue($data, 'auth_key'),
-            ArrayHelper::getValue($data, 'created_at'),
+            ArrayHelper::getValue($data, 'created_at')
         );
     }
     /**

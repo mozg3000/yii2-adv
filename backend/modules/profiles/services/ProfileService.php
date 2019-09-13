@@ -61,7 +61,7 @@ class ProfileService implements \backend\modules\profiles\services\contracts\Pro
             \Yii::$app->security->generatePasswordHash($form->password),
             \Yii::$app->security->generateRandomString(),
             10,
-            \Yii::$app->security->generateRandomString(),
+            \Yii::$app->security->generateRandomString()
             );
 
         return $dto;

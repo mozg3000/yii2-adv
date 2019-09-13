@@ -11,7 +11,12 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'language'=>'ru-RU',
+    'modules' => [
+        'profiles' => [
+            'class' => 'backend\modules\profiles\Module',
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
@@ -46,6 +51,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'profile/<action>'=>'profiles/profile/<action>',
                 ['class'=>\yii\rest\UrlRule::class,'controller'=>'activity',
                 'pluralize'=>false]
             ],

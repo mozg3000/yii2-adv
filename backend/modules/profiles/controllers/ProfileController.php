@@ -22,12 +22,12 @@ class ProfileController extends BaseController
      */
     public $service;
 
-    public function __construct(string $id, $module, array $config = [])
+    public function __construct(string $id, $module, ProfileService $service, array $config = [])
     {
-        $connection = \Yii::$app->db;
+        //$connection = \Yii::$app->db;
 //        print_r($connection);exit();
-        $storage = new ProfileStorageMysql($connection);
-        $this->service = new \backend\modules\profiles\services\ProfileService($storage) ;
+        //$storage = new ProfileStorageMysql($connection);
+        $this->service = $service;
 
         parent::__construct($id, $module, $config);
     }

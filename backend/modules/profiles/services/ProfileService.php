@@ -13,6 +13,7 @@ use backend\modules\profiles\entities\Profile;
 use backend\modules\profiles\models\ProfileCreateForm;
 use backend\modules\profiles\services\contracts\ProfileStorage;
 use backend\modules\profiles\services\dto\ProfileSaveStorageDTO;
+use common\components\logger\Logger;
 use Faker\Provider\Uuid;
 
 class ProfileService implements \backend\modules\profiles\services\contracts\ProfileService
@@ -21,18 +22,31 @@ class ProfileService implements \backend\modules\profiles\services\contracts\Pro
      * @var ProfileStorage
      */
     private $storage;
+    /**
+     * @var Logger
+     */
+    private $logger;
 
     /**
      * ProfileService constructor.
      * @param ProfileStorage $storage
+     * @param Logger $logger
      */
-    public function __construct(ProfileStorage $storage)
+    public function __construct(ProfileStorage $storage, Logger $logger)
     {
         $this->storage = $storage;
+        $this->logger = $logger;
     }
 
     public function createProfile(ProfileCreateForm &$model): ?Profile
     {
+        $model->on($model::EVENT_USER_EXIST, function ($event){
+            \Yii::warning('send message of event '. $event->name);
+        });
+        $model->on($model::EVENT_USER_EXIST, function ($event){
+            $this->logger->log('send message INFO, event: '.$event->name);
+        });
+
         if(!$model->validate()){
 
             return null;
@@ -40,6 +54,8 @@ class ProfileService implements \backend\modules\profiles\services\contracts\Pro
         if($this->storage->findProfileByUsernameAndEmail($model->username,$model->email)){
 
             $model->addError('username','Пользователь с таким именем или емейлом уже есть в системе');
+
+            $model->trigger($model::EVENT_USER_EXIST);
 
             return null;
         }

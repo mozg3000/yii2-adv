@@ -1,5 +1,6 @@
 <?php
 
+use common\components\logger\Logger;
 use yii\di\Instance;
 
 $params = array_merge(
@@ -30,7 +31,15 @@ return [
 
                 return Yii::$app->db;
             },
-            \backend\modules\profiles\services\contracts\ProfileService::class=>['class'=>\backend\modules\profiles\services\ProfileService::class]
+            \backend\modules\profiles\services\contracts\ProfileService::class=>['class'=>\backend\modules\profiles\services\ProfileService::class],
+            Logger::class=>[
+                ['class'=>\backend\modules\profiles\services\logger\LoggerProfile::class],
+                [Instance::of('mailer')]
+            ],
+            'mailer'=>function(){
+
+                return Yii::$app->mailer;
+            }
         ]
     ],
     'components' => [

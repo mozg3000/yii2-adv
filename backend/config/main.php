@@ -1,6 +1,8 @@
 <?php
 
 use common\components\logger\Logger;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use yii\di\Instance;
 
 $params = array_merge(
@@ -39,7 +41,8 @@ return [
             'mailer'=>function(){
 
                 return Yii::$app->mailer;
-            }
+            },
+            EventDispatcherInterface::class=>['class'=>EventDispatcher::class]
         ]
     ],
     'components' => [

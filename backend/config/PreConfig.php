@@ -22,6 +22,6 @@ class PreConfig implements BootstrapInterface
      */
     public function bootstrap($app)
     {
-        \Yii::$container->set(ProfileStorageMysql::class,[],[\Yii::$app->db]);
+//        \Yii::$container->setSingleton(ProfileStorageMysql::class,[],[\Yii::$app->db]);
     }
 }

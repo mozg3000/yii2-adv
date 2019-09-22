@@ -10,6 +10,9 @@ namespace backend\config;
 
 
 use backend\modules\profiles\infrastructure\ProfileStorageMysql;
+use backend\subscribers\ProfileSubscriber;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use yii\base\Application;
 use yii\base\BootstrapInterface;
 
@@ -23,5 +26,10 @@ class PreConfig implements BootstrapInterface
     public function bootstrap($app)
     {
 //        \Yii::$container->setSingleton(ProfileStorageMysql::class,[],[\Yii::$app->db]);
+        /**
+         * @var EventDispatcher $eventDispatcher
+         */
+        $eventDispatcher = \Yii::$container->get(EventDispatcherInterface::class);
+        $eventDispatcher->addSubscriber(new ProfileSubscriber());
     }
 }

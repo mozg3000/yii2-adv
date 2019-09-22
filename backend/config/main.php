@@ -1,4 +1,7 @@
 <?php
+
+use yii\di\Instance;
+
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -10,12 +13,25 @@ return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log', \backend\config\PreConfig::class],
     'language'=>'ru-RU',
     'modules' => [
         'profiles' => [
             'class' => 'backend\modules\profiles\Module',
         ],
+    ],
+    'container'=>[
+        'singletons'=>[
+            \backend\modules\profiles\services\contracts\ProfileStorage::class=>[
+                ['class'=>\backend\modules\profiles\infrastructure\ProfileStorageMysql::class],
+                [Instance::of('db_conn')]
+                ],
+            'db_conn'=>function(){
+
+                return Yii::$app->db;
+            },
+            \backend\modules\profiles\services\contracts\ProfileService::class=>['class'=>\backend\modules\profiles\services\ProfileService::class]
+        ]
     ],
     'components' => [
         'request' => [

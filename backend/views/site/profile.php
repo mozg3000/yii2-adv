@@ -2,7 +2,7 @@
 /*
  * @var $model \common\models\User
  */
-$this->title = 'Profile '.$model->username;
+$this->title = 'ProfileCreateForm '.$model->username;
 ?>
 
 <div class="row">
